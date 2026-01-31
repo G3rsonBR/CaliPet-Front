@@ -1,24 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  });
+  const isAuthenticated = true;
 
-  const [data] = useState(
-    () => {
-      return JSON.parse(localStorage.getItem("user") || "{}");
-    }
-  )
+  const data = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
-  }, [isAuthenticated]);
+    localStorage.setItem('isAuthenticated', 'true');
+  }, []);
 
   const toggleAuth = () => {
-    setIsAuthenticated(prevAuth => !prevAuth);  
-    
-    window.location.reload();
+    // não faz nada
   };
 
   return { isAuthenticated, toggleAuth, data };
